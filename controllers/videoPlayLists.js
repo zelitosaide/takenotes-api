@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import VideoPlayList from "../models/videoPlayList.js";
 
-export const get = async function (_, res) {
+export async function get(_, res) {
   try {
     const videoPlayLists = await VideoPlayList.find();
     res.status(200).json(videoPlayLists);
@@ -11,7 +11,22 @@ export const get = async function (_, res) {
   }
 }
 
-export const create = async function (req, res) {
+export async function getById(req, res) {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ message: "No Video Playlist with that ID" });
+    }
+
+    const videoPlayList = await VideoPlayList.findById(id);
+    res.status(200).json(videoPlayList);
+  } catch (error) {
+    res.status(409).json({ message: error });
+  }
+}
+
+export async function create(req, res) {
   try {
     const videoPlayList = new VideoPlayList(req.body);
     await videoPlayList.save();
@@ -21,7 +36,7 @@ export const create = async function (req, res) {
   }
 }
 
-export const update = async function (req, res) {
+export async function update(req, res) {
   try {
     const { id } = req.params;
 
@@ -37,7 +52,7 @@ export const update = async function (req, res) {
   }
 }
 
-export const remove = async function (req, res) {
+export async function remove(req, res) {
   try {
     const { id } = req.params;
 
