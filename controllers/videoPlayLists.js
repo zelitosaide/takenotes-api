@@ -11,20 +11,38 @@ export async function get(_, res) {
   }
 }
 
-export async function getById(req, res) {
+// export async function getById(req, res) {
+//   try {
+//     const { id } = req.params;
+
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return res.status(404).json({ message: "No Video Playlist with that ID" });
+//     }
+
+//     const videoPlayList = await VideoPlayList.findById(id);
+//     res.status(200).json(videoPlayList);
+//   } catch (error) {
+//     res.status(409).json({ message: error });
+//   }
+// }
+
+
+export async function getByPlaylistId(req, res) {
   try {
-    const { id } = req.params;
+    const { playlistId } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ message: "No Video Playlist with that ID" });
+    const videoPlayList = await VideoPlayList.findOne({ playlistId });
+
+    if (!videoPlayList) {
+      return res.status(404).json({ message: "No Video Playlist with that playlistId" });
     }
-
-    const videoPlayList = await VideoPlayList.findById(id);
     res.status(200).json(videoPlayList);
   } catch (error) {
     res.status(409).json({ message: error });
   }
 }
+
+
 
 export async function create(req, res) {
   try {
