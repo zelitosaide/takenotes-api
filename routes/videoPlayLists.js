@@ -2,7 +2,6 @@ import express from "express";
 
 import {
   get,
-  // getById,
   create,
   update,
   remove,
@@ -12,10 +11,9 @@ import {
 const router = express.Router();
 
 router.get("/", get);
-// router.get("/:id", getById);
 router.get("/:playlistId", getByPlaylistId);
 router.post("/", create);
-router.patch("/:id", update);
-router.delete("/:id", remove);
+router.patch("/:playlistId", update);
+router.delete("/:playlistId", remove);
 
 export default router;
