@@ -6,7 +6,7 @@ import {
   update,
   remove,
   getByPlaylistId
-} from "../controllers/videoPlayLists.js";
+} from "../controllers/playlists.js";
 
 const router = express.Router();
 
@@ -16,4 +16,4 @@ router.post("/", create);
 router.patch("/:playlistId", update);
 router.delete("/:playlistId", remove);
 
-export default router;
+export { router };

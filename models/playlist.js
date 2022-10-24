@@ -1,8 +1,12 @@
 import mongoose from "mongoose";
 
-const videoPlayListSchema = mongoose.Schema({
+const playlistSchema = mongoose.Schema({
   title: String,
   playlistId: String,
+  favorite: {
+    type: Boolean,
+    default: false,
+  },
   userId: {
     type: String,
     default: ""
@@ -13,6 +17,6 @@ const videoPlayListSchema = mongoose.Schema({
   },
 });
 
-const VideoPlayList = mongoose.model('VideoPlayList', videoPlayListSchema);
+const Playlist = mongoose.model('Playlist', playlistSchema);
 
-export default VideoPlayList;
+export { Playlist };
