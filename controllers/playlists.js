@@ -1,6 +1,6 @@
 import { Playlist } from "../models/playlist.js";
 
-export async function get(_, res) {
+export async function get(req, res) {
   try {
     const playlist = req.query.playlist;
     let playlists;
