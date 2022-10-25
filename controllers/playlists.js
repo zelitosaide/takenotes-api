@@ -2,7 +2,14 @@ import { Playlist } from "../models/playlist.js";
 
 export async function get(_, res) {
   try {
-    const playlists = await Playlist.find();
+    const playlist = req.query.playlist;
+    let playlists;
+
+    if (playlist) {
+      playlists = await Playlist.find({ title: new RegExp(playlist, "i") });
+    } else {
+      playlists = await Playlist.find();
+    }
     res.status(200).json(playlists);
   } catch (error) {
     res.status(404).json({ message: error.message });
