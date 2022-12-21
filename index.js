@@ -22,7 +22,8 @@ app.get("/", function (_, res) {
   res.send("--- Welcome to Takenotes API ---");
 });
 
-mongoose.connect(CONNECTION_URL)
+mongoose
+  .connect(CONNECTION_URL)
   .then(function () {
     app.listen(PORT, function () {
       console.log(`Server running on port: ${PORT}`);
